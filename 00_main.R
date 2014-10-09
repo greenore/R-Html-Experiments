@@ -11,11 +11,14 @@
 
 ## Download init File
 download.file(url="https://rawgit.com/greenore/initR/master/init.R",
-              destfile="01_initialize.R", method="curl")
+              destfile="01_initialize.R", method="wget")
 
-## Source Files
+## Source File
 source("01_initialize.R")
 source("02_load.R")
+
+library(SVGAnnotation)
+library(htmltools)
 
 respXML <- function( svg_xml, height = NULL, width = "100%", print = T, ... ){
   # svg_xml should be an XML document
