@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript
 # Purpose:         Responsive SVG
 # Date:            2014-08-15       
-# Author:          Tim Hagmann
+# Author:          http://timelyportfolio.blogspot.com, Tim Hagmann
 # Data Used:       
 # Packages Used:   
 # Machine:         X10004122 (Win 32)
