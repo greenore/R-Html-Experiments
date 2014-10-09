@@ -17,40 +17,45 @@ download.file(url="https://rawgit.com/greenore/initR/master/init.R",
 source("01_initialize.R")
 source("02_load.R")
 
-## Start session
-# pJS <- phantom()
-startServer(); Sys.sleep(2)
-
-# remDr <- remoteDriver(browserName="internet explorer")
-# remDr <- remoteDriver(browserName="phantomjs")
-# remDr <- firefoxDriver(useProfile=T, profileName="selenium")
-remDr <- chromeDriver(useProfile=T, profileName="selenium", internalTesting=T)
-remDr$open(); remDr$maxWindowSize()
-
-## Load Data
-df.path <- 'data_output/comparis_cantons.csv'
-index <- 1:400
-
-df <- read.csv2(df.path, sep = ';', header = T, stringsAsFactors = F, encoding = 'latin1')
-i <- index[1]
-
-# Unhide
-unhideVersName <- FALSE
-unhideTableVersName <- FALSE
-
-## Run Program
-for(i in index){
-  print('--------------------------------------')
-  print(paste('Run profil nr.', i))
+respXML <- function( svg_xml, height = NULL, width = "100%", print = T, ... ){
+  # svg_xml should be an XML document
+  library(htmltools)
+  library(XML)
   
-  remDr$deleteAllCookies()
-  source('prog_provider/comparis2/00_functions.R')
-  source('prog_provider/comparis2/01_data_cleanup.R')
-  source('prog_provider/comparis2/02_fill_car.R')
-  source('prog_provider/comparis2/03_fill_driver.R')
-  source('prog_provider/comparis2/04_fill_coverage.R')
-  source('prog_provider/comparis2/05_read_table.R')
+  svg <- structure(
+    ifelse(
+      length(getDefaultNamespace(svg_xml)) > 0
+      ,getNodeSet(svg_xml,"//x:svg", "x")
+      ,getNodeSet(svg_xml,"//svg")
+    )
+    ,class="XMLNodeSet"
+  )
+  
+  xmlApply(
+    svg
+    ,function(s){
+      a = xmlAttrs(s)
+      removeAttributes(s)
+      xmlAttrs(s) <- a[-(1:2)]
+      xmlAttrs(s) <- c(
+        style = paste0(
+          "height:100%;width:100%;"
+        )
+      )
+    }
+  )
+  
+  svg <- HTML( saveXML( svg_xml) )
+  
+  svg <- tags$div(
+    style = paste(
+      sprintf('width:%s;',width)
+      ,ifelse(!is.null(height),sprintf('height:%s;',height),"")
+    )
+    ,svg
+  )
+  
+  if(print) html_print(svg) 
+  
+  return( invisible( svg ) )
 }
-
-remDr$close()
-remDr$closeServer()
