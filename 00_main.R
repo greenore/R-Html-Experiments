@@ -17,14 +17,7 @@ download.file(url="https://rawgit.com/greenore/initR/master/init.R",
 source("01_initialize.R")
 source("02_load.R")
 
-library(SVGAnnotation)
-library(htmltools)
-
-respXML <- function( svg_xml, height = NULL, width = "100%", print = T, ... ){
-  # svg_xml should be an XML document
-  library(htmltools)
-  library(XML)
-  
+respXML <- function( svg_xml, height = NULL, width = "100%", print = T, ... ){  
   svg <- structure(
     ifelse(
       length(getDefaultNamespace(svg_xml)) > 0
@@ -62,3 +55,37 @@ respXML <- function( svg_xml, height = NULL, width = "100%", print = T, ... ){
   
   return( invisible( svg ) )
 }
+
+html_print(attachDependencies(
+  tagList(
+    respXML( 
+      svgPlot(
+        dotchart(
+          t(VADeaths)
+          , xlim = c(0,100)
+          , main = "Death Rates in Virginia - 1940"
+        )
+      )
+      , height = "100%"
+      , print = F
+    )
+    , tags$script(
+      HTML(
+        '
+        var svg = d3.selectAll("svg");
+        svg.select("g[id*= \'surface\']").call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
+        
+        function zoom() {
+          svg.select("g[id*= \'surface\']").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        }
+        '
+      )
+    )
+  )
+  ,htmlDependency(
+    name="d3"
+    ,version="3.0"
+    ,src=c("href"="http://d3js.org/")
+    ,script="d3.v3.js"
+  )
+))
