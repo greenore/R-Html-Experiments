@@ -1,5 +1,5 @@
-library(htmltools)
-library(pipeR)
+packagesCRAN(c("htmltools", "pipeR"), update=F)
+
 tagList(
   tags$style(
     '
@@ -49,9 +49,11 @@ tagList(
   </div>
   ' %>>% HTML
   ) %>>% html_print()
-library(base64)
+
+packagesCRAN(c("base64", "ggplot2"), update=F)
+
 pngfile <- tempfile()
-png( pngfile, width = 600, height = 600 )
+png(pngfile, width=600, height=600)
 data.frame(
   y = sin(seq(0,pi,0.01))
   ,x = seq(0,pi,0.01)
@@ -69,7 +71,7 @@ data.frame(
              ) )
   )
 dev.off()
-#img(pngfile) %>>% HTML %>>% html_print
+# img(pngfile) %>>% HTML %>>% html_print
 tagList(
   tags$style(
     sprintf("

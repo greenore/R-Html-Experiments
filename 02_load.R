@@ -4,7 +4,5 @@ requiredPackages <- c('SVGAnnotation')
 packagesBioconductor(requiredPackages, update=F)
 
 # CRAN
-requiredPackages <- c("htmltools")
+requiredPackages <- c("htmltools", "pipeR")
 packagesCRAN(requiredPackages, update=F)
-
-rm(list = ls())
