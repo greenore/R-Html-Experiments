@@ -11,11 +11,11 @@
 
 ## Download init File
 download.file(url="https://rawgit.com/greenore/initR/master/init.R",
-              destfile="01_initialize.R", method="wget")
+              destfile="01_init.R", method="wget")
 
 ## Source File
 update_packages <- FALSE
-source("01_initialize.R")
+source("01_init.R")
 source("02_load.R")
 source("03_responsiveSVG.R")
 source("04_rCSS.R")
