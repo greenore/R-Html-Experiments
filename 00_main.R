@@ -5,7 +5,7 @@
 # Data Used:
 # Packages Used:
 # Machine:         X10004122 (Win 32)
-# Notes:           In order for it to work, RTools() has to be installed
+# Notes:           WINDOWS: In order for it to work, RTools() has to be installed
 # R Version:       R version 3.1.1 -- "Sock it to Me"
 ################################################################################
 
