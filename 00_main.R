@@ -2,8 +2,6 @@
 # Purpose:         HTML Experiments
 # Date:            2014-10-10
 # Author:          http://timelyportfolio.blogspot.com, Tim Hagmann
-# Data Used:
-# Packages Used:
 # Machine:         X10004122 (Win 32)
 # Notes:           WINDOWS: In order for it to work, RTools() has to be installed
 # R Version:       R version 3.1.1 -- "Sock it to Me"
