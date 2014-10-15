@@ -50,7 +50,7 @@ tagList(
   ' %>>% HTML
   ) %>>% html_print()
 
-packagesCRAN(c("base64", "ggplot2"), update=F)
+packagesCRAN(c("base64", "ggplot2"), update=update_packages)
 
 pngfile <- tempfile()
 png(pngfile, width=600, height=600)
