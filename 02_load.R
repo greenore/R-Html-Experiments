@@ -7,4 +7,4 @@ packagesBioconductor(requiredPackages, update=update_packages)
 requiredPackages <- c("htmltools", "pipeR")
 packagesCRAN(requiredPackages, update=update_packages)
 
-rm(list=ls())
+rm(requiredPackages)

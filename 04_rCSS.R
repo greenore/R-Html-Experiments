@@ -1,4 +1,4 @@
-packagesCRAN(c("htmltools", "pipeR"), update=F)
+packagesCRAN(c("htmltools", "pipeR"), update=update_packages)
 
 tagList(
   tags$style(
